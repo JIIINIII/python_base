@@ -103,6 +103,31 @@ def userAdd(x,y):
 
 print('add - ',userAdd(10,20))
 print('function address - ',userAdd)
+
 f = userAdd # 함수를 변수에 저장
+
 print('f - add - ',f(10,20))
 
+# 함수를 다른 함수의 인자로 전달
+def userOperation(func, arg):
+    return func(arg[0],arg[1])
+
+def userMinus(x,y):
+    return x - y
+data = (10,20)
+result = userOperation(userAdd,data)
+print('result add - ',result)
+result = userOperation(userMinus,data)
+print('result minus - ', result)
+
+# 함수의 리턴값으로 다른 함수를 사용할 수 있다.
+# closure(함수 내부에 자료구조를 생성하여 값을 저장해 놓는 개념)
+def outer(x):
+    tmp = x
+    def inner(y):
+        return tmp + y
+    return inner
+
+# caller
+result = outer(5)
+print('result - ',result(10))
