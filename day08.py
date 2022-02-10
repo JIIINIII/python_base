@@ -131,3 +131,98 @@ def outer(x):
 # caller
 result = outer(5)
 print('result - ',result(10))
+
+# generator (반복문) - yield, next()
+# - 장점 : 빠른 수행속도, 적은 메모리 사용으로 인한 성능향상
+
+def loopFunc(lst):
+    result = []
+    for tmp in lst:
+        result.append(tmp**2)
+    return result
+
+# caller
+data = [1,2,3,4,5]
+result = loopFunc(data)
+print('result - ', result)
+
+def generatorFunc(lst):
+    for tmp in lst:
+        yield tmp ** 2   # yield: 일시정지 시키는 것
+
+# caller
+result = generatorFunc(data)
+print('generator type - ',type(result))
+# print('next - ',next(result))
+# print('next - ',next(result))
+# print('next - ',next(result))
+# print('next - ',next(result))
+# print('next - ',next(result))
+
+for e in result:
+    print(e)
+
+lst = [tmp **2 for tmp in data]
+print('list comprehension - ',lst)
+generator = (tmp ** 2 for tmp in data)
+print('type - ',generator)
+for g in generator:
+    print(g)
+print()
+print('end for ~')
+print('generator - ',list(generator))
+# for g in generator:
+#    print(g)
+
+# 파일입출력
+# 순수 파이썬기반 입출력, pandas 기반 입출력
+'''
+텍스트 파일
+- open(file=xxxx,mode = 'r|w|a',encoding = xxxx)
+  close()
+- with open() ~ as file:
+'''
+def readTxt(path,mode):
+    file = None
+    try :
+        file = open(path,mode,encoding = 'utf-8')
+        print('file type -',type(file),file)
+        print('read - \n',file.read())
+    except Exception as e:
+        print(str(e))
+    else:
+        print('read - \n',file.read())
+    finally:
+        if file != None:
+            file.close()
+# caller
+#readTxt('C:/Users/sonhyeonjin/PycharmProjects/data/greeting.txt','r')
+
+# 출력
+def writeTxt(path,mode):
+    file = open(path,mode ,encoding = 'utf-8')
+    file.write('\nHello~, Seop ^*^')
+    file.close()
+
+# caller
+# writeTxt('C:/Users/sonhyeonjin/PycharmProjects/data/test.txt','a')
+
+def with_open_file(path, mode,e):
+    with open(path, mode, encoding = e) as file:
+        # print('read type - ', type(file.read()))
+        # print('readlines type - ',type(file.readlines()))
+        # print('readline type - ',type(file.readline()))
+        # readline() 구현
+        # for line in file:
+        #     print(line.strip('\n'))
+        # line = None
+        # while line != '':
+        #     line = file.readline()
+        #     print(line.strip('\n'))
+        # readlines()
+        lst = file.readlines()
+        for s in lst:
+            print(s.strip('\n'))
+
+# caller
+with_open_file('C:/Users/sonhyeonjin/PycharmProjects/data/greeting.txt','r','utf-8')
