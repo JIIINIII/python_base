@@ -63,3 +63,46 @@ def exceptionFunc(lst):
 # exceptionFunc(usrlst)
 
 # 사용자 정의 예외클래스를 만들 수 있다.
+class UserNegativeDivisionError(Exception):
+    def __init__(self,msg):
+        self.msg = msg
+def positiveDivide(x,y):
+    if(y < 0 ):
+        raise UserNegativeDivisionError('음수로 나눌 수 없습니다')
+    else:
+        return x/y
+try:
+    result = positiveDivide(10,0)
+    print('call positive func - ',result)
+except UserNegativeDivisionError as e:
+    print(e.msg)
+except ZeroDivisionError as e:
+    print(e.args[0])
+print('programming end - ')
+
+# magic function
+# __xxxx__()
+
+class MagicClass(object):
+    def __init__(self):
+        print('객체 생성시 호출')
+    def __del__(self):
+        print('객체 삭제시 호출')
+    def __str__(self):
+        return '이제는 주소값이 아니라 문자열이 출력'
+
+# obj = MagicClass()
+# print(obj)
+
+# 일급함수, first class
+# - 변수에 함수를 저장할 수 있다.
+# - 함수를 다른 함수의 인자로 전달할 수 있다.
+
+def userAdd(x,y):
+    return x + y
+
+print('add - ',userAdd(10,20))
+print('function address - ',userAdd)
+f = userAdd # 함수를 변수에 저장
+print('f - add - ',f(10,20))
+
