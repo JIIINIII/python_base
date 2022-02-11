@@ -59,7 +59,7 @@ import pandas as pd
 def load_file(filePath):
     data = None
     if filePath.split('.')[-1] == 'csv':
-        data = pd.read_csv(filePath,encoding = 'ms949')
+        data = pd.read_csv(filePath,encoding = 'ms949',header = None)
     elif filePath.split('.')[-1] == 'xls' or filePath.split('.')[-1] == 'xlsx':
         data = pd.ExcelFile(filePath)
     else:
@@ -134,4 +134,26 @@ def json_file(filePath):
 
 
 # caller
-json_file('C:/Users/sonhyeonjin/PycharmProjects/data/usagov_bitly.txt')
+# json_file('C:/Users/sonhyeonjin/PycharmProjects/data/usagov_bitly.txt')
+import re
+def clean_txt(msg):
+    msg = re.sub('[,.?!:;]'," ",str(msg))
+    msg = re.sub('[a-zA-Z0-9]'," ",str(msg))
+    return msg
+
+def spam_func(filePath):
+    data = load_file(filePath)
+    print('spam data type - ',type(data))
+    # print('data - ')
+    # print(data)
+    target = data[0]
+    msg    = data[1]
+    print('target - \n ',target)
+    target = [ 1 if t == 'spam' else 0 for t in target]
+    print('target encoding - \n',target,type(target))
+    print()
+    print(msg)
+    print('clean msg - ')
+
+# caller
+spam_func('C:/Users/sonhyeonjin/PycharmProjects/data/spam_data.csv')
