@@ -1,6 +1,6 @@
 from statistics import mean
 mpgLst = []
-file = open('C:/Users/sonhyeonjin/PycharmProjects/data/mpg2.txt', 'r', encoding='utf-8')
+file = open('C:/Users/sonhyeonjin/PycharmProjects/data/mpg.txt', 'r', encoding='utf-8')
 file.readline()
 line = file.readline()
 while line != '':
@@ -27,17 +27,43 @@ for i in range(len(dihwlst)):
 print('배기량 4 이하의 평균 연비 {}'.format(mean(lower4)))
 print('배기량 5 이상의 평균 연비 {}'.format(mean(upper5)))
 
-
 # 2. 자동차 제조 회사에 따라 도시 연비가 다른지 알아보려고 한다.
 # "audi"와 "toyota" 중 어느 manufacturer(제조회사)의 cty(도시 연비)가
 # 평균적으로 더 높은지 확인하세요.
-
+audi = []
+toyota = []
+for i in range(len(mpgLst)):
+    if mpgLst[i][0] == 'audi':
+        audi.append(float(mpgLst[i][7]))
+    elif mpgLst[i][0] == 'toyota':
+        toyota.append(float(mpgLst[i][7]))
+print('audi의 평균 cty {}'.format(mean(audi)))
+print('toyota의 평균 cty {}'.format(mean(toyota)))
 # 3. "chevrolet", "ford", "honda" 자동차의 고속도로 연비 평균을 알아보려고 한다.
 # 이 회사들의 데이터를 추출한 후 hwy(고속도로 연비) 평균을 구하세요.
+chever = []
+ford = []
+honda = []
+for i in range(len(mpgLst)):
+    if mpgLst[i][0] == 'chevrolet':
+        chever.append(float(mpgLst[i][8]))
+    elif mpgLst[i][0] == 'ford':
+        ford.append(float(mpgLst[i][8]))
+    elif mpgLst[i][0] == 'honda':
+        honda.append(float(mpgLst[i][8]))
+print('cheverolet의 평균 hwy {}'.format(mean(chever)))
+print('ford의 평균 hwy {}'.format(mean(ford)))
+print('honda의 평균 hwy {}'.format(mean(honda)))
 
 # 4. "audi"에서 생산한 자동차 중에 어떤 자동차 모델의 hwy(고속도로 연비)가
 # 높은지 알아보려고 한다. "audi"에서 생산한 자동차 중 hwy가 1~5위에 해당하는
 # 자동차의 데이터를 출력하세요.
+audi_data = []
+for i in range(mpgLst):
+    if mpgLst[i][0] == 'audi':
+        audi_data.append(mpgLst[i][0])
+
+
 
 # 5. mpg 데이터는 연비를 나타내는 변수가 2개입니다.
 # 두 변수를 각각 활용하는 대신 하나의 통합 연비 변수를 만들어 사용하려 합니다.
