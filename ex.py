@@ -58,10 +58,11 @@ print('honda의 평균 hwy {}'.format(mean(honda)))
 # 4. "audi"에서 생산한 자동차 중에 어떤 자동차 모델의 hwy(고속도로 연비)가
 # 높은지 알아보려고 한다. "audi"에서 생산한 자동차 중 hwy가 1~5위에 해당하는
 # 자동차의 데이터를 출력하세요.
-audi_data = []
-for i in range(mpgLst):
-    if mpgLst[i][0] == 'audi':
-        audi_data.append(mpgLst[i][0])
+
+# audi_data = []
+# for i in range(mpgLst):
+#     if mpgLst[i][0] == 'audi':
+#         audi_data.append(mpgLst[i])
 
 
 
